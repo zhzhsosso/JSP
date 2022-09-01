@@ -17,6 +17,7 @@
 			내용 : <textarea rows="10" cols="20" name="content"></textarea>
 			<hr>
 			<input type="submit" value="글쓰기">
+			
 		</form>
 	</fieldset>
 </body>
