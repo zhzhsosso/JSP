@@ -94,7 +94,6 @@ public class BoardDTO {
 	}
 	
 	
-	
 	//alt shift s + s
 	//한번에 BoardDTO 객체에 저장된 정보 확인용
 	

@@ -37,7 +37,6 @@
 			<td>ip</td>
 		</tr>
 		
-		
 		<%for(int i=0;i<boardList.size();i++){ 
 				BoardDTO dto = (BoardDTO) boardList.get(i);
 		%>
