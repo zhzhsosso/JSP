@@ -9,6 +9,7 @@
 <body>
 	<h1>writePro.jsp</h1>
 	<%
+	
 		//한글처리
 		
 		//자바빈 객체 -> BoardDTO(Data Transfer Object) (=BoardBean)

@@ -16,6 +16,7 @@ public class Test2 {
 		// => 가변길이 배열 생성
 		
 		
+		
 //		ArrayList list = new ArrayList();
 		//=>타입 상관없이 모든 타입 저장가능(Object)
 		//ArrayList<참조형타입> list = new ArrayList<참조형타입>();

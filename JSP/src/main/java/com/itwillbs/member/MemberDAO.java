@@ -15,7 +15,6 @@ public class MemberDAO {
 	private ResultSet rs = null;
 	private String sql = "";
 	
-	
 	public MemberDAO() {
 		System.out.println("DAO : 생성자 호출(객체 생성)");
 		System.out.println("DAO : DB연결에 대한 모든 처리 준비 완료");

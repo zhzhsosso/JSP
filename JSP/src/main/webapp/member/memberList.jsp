@@ -13,7 +13,6 @@
 	<h1>memberList.jsp</h1>
 	<h2>회원정보 목록</h2>
 	
-	
 	<%
 		request.setCharacterEncoding("UTF-8");
 		// 로그인여부 체크 + 관리자 여부 체크

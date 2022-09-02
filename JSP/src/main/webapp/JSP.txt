@@ -64,7 +64,6 @@ D:\workspace_jsp
 	클라이언트		   WEB 서버 	WAS	DB(Mysql)
 		<-응답정보<-          <-      <-
 
-	
           
 
 

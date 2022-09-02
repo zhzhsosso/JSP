@@ -37,6 +37,7 @@
 		//jsp 페이지는 실행순서
 		//jsp-html-js
 		
+		
 		//jsp 코드가 처음부터 끝까지 실행될대 null 비교불가
 		//객체 레퍼런스를 사용할때는 항상null 값을 체크
 // 		if(id.equals("admin")){
