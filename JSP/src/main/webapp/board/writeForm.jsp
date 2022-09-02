@@ -18,7 +18,6 @@
 			<hr>
 			<input type="submit" value="글쓰기">
 			
-			
 		</form>
 	</fieldset>
 </body>
