@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class BoardDAO {
@@ -38,6 +39,20 @@ public class BoardDAO {
 		System.out.println("DAO : "+con);
 		return con;
 	}
+	
+	//자원해제 메서드-closeDB()
+	public void closeDB() {
+		System.out.println("DAO : 디비연결정보 해제");
+		
+		try {
+			if(rs != null) rs.close();
+			if(pstmt != null) pstmt.close();
+			if(con != null) con.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}//자원해제 메서드-closeDB()
 	
 	
 	//글쓰기 메서드 - insertBoard()
@@ -102,6 +117,8 @@ public class BoardDAO {
 	
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			closeDB();
 		}
 		
 	}
@@ -151,8 +168,96 @@ public class BoardDAO {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally {
+			closeDB();
 		}
 		
 		return boardList;
+	}//글정보 가져오기
+	
+	public ArrayList getBoardList(int startRow, int pageSize) {
+		System.out.println("DAO : getBoardList() 호출 ");
+		// 글정보 모두 저장하는 배열
+		ArrayList boardList = new ArrayList();
+		
+		
+		try {
+			//디비연결
+			con=getConnection();
+			//sql작성 & pstmt 객체
+			sql="select * from itwill_board order by re_ref desc, re_seq asc limit ?,?";
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, startRow-1);//시작행 - 1
+			pstmt.setInt(2, pageSize);//개수
+			
+			//sql 실행
+			rs = pstmt.executeQuery();
+			//데이터 처리(DB->DTO->List)
+			while(rs.next()) {
+				
+				//DB->DTO
+				BoardDTO dto = new BoardDTO();
+				dto.setBno(rs.getInt("bno"));
+				dto.setContent(rs.getString("content"));
+				dto.setDate(rs.getDate("date"));
+				dto.setFile(rs.getString("file"));
+				dto.setName(rs.getString("name"));
+				dto.setPass(rs.getString("pass"));
+				dto.setRe_lev(rs.getInt("re_lev"));
+				dto.setRe_ref(rs.getInt("re_ref"));
+				dto.setRe_seq(rs.getInt("re_seq"));
+				dto.setReadcount(rs.getInt("readcount"));
+				dto.setSubject(rs.getString("subject"));
+				dto.setIp(rs.getString("ip"));
+				
+				//DTO -> List
+				boardList.add(dto);
+				
+			}//while
+			
+			System.out.println("DAO : 게시판 목록 저장완료");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			closeDB();
+		}
+		
+		return boardList;
+	}//글정보 가져오기
+	
+	//전체 글의 개수 - getBoardCount()
+	public int getBoardCount() {
+		int cnt =0;
+		
+		try {
+			//디비연결
+			getConnection();
+			//sql & pstmt 객체
+			sql="select count(*) from itwill_board";
+			pstmt = con.prepareStatement(sql);
+			
+			//sql 실행
+			rs = pstmt.executeQuery();
+			
+			//데이터 처리
+			if(rs.next()) {
+//				cnt = rs.getInt("count(*)");
+				cnt = rs.getInt(1);
+			}
+			
+			System.out.println("DAO : 전체 글의 개수" + cnt + "개");
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			closeDB();
+		}
+		
+		return cnt;
 	}
+	
+	//전체 글의 개수 - getBoardCount()
 }
