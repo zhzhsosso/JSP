@@ -19,7 +19,7 @@
 		
 	%>
 	<fieldset>
-		<form action="writePro.jsp" method="post">
+		<form action="reWritePro.jsp" method="post">
 			<input type="hidden" name="bno" value="<%=bno %>">
 			<input type="hidden" name="re_ref" value="<%=re_ref %>">
 			<input type="hidden" name="re_lev" value="<%=re_lev %>">

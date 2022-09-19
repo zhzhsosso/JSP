@@ -426,7 +426,7 @@ public class BoardDAO {
 			
 			//2. 답글순서 재배치
 //			=> 같은 그룹에 있으면서, 기존의 seq 값보다 큰값이 있을 때
-			sql="update itwill_board set re_seq=re_seq+1 where re_ref=? and re_seq>?";
+			sql="update itwill_board set re_seq = re_seq+1 where re_ref=? and re_seq>?";
 			pstmt = con.prepareStatement(sql);
 			
 			pstmt.setInt(1, dto.getRe_ref());
@@ -449,8 +449,8 @@ public class BoardDAO {
 			
 			pstmt.setInt(6, 0); //조회수 0
 			pstmt.setInt(7, dto.getRe_ref()); //re_ref :원글의 번호와 동일
-			pstmt.setInt(8, dto.getRe_lev()); //re_lev : 원글의 lev + 1
-			pstmt.setInt(9, dto.getRe_seq()); // re_seq : 원글의 seq +1
+			pstmt.setInt(8, dto.getRe_lev()+1); //re_lev : 원글의 lev + 1
+			pstmt.setInt(9, dto.getRe_seq()+1); // re_seq : 원글의 seq +1
 			
 			pstmt.setString(10, dto.getIp());
 			pstmt.setString(11, dto.getFile());
