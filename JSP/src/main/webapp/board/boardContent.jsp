@@ -38,7 +38,7 @@
       </tr>
       <tr>
          <td>작성자</td>
-         <td><%=dto.getReadcount() %></td>
+         <td><%=dto.getName() %></td>
          <td>작성일</td>
          <td><%=dto.getDate() %></td>
       </tr>
@@ -52,7 +52,11 @@
       </tr>
       <tr>
           <td>첨부파일</td>
-          <td colspan="3"><%=dto.getFile() %></td>
+          <td colspan="3">
+          <a href="../file/fileDown1.jsp?file_name=<%=dto.getFile() %>"><%=dto.getFile() %></a>
+<%--           <a href="../upload/=<%=dto.getFile() %>"><%=dto.getFile() %></a> --%>
+          
+          </td>
       </tr>
       
       <tr>

@@ -1,5 +1,4 @@
 <%@page import="java.net.URLEncoder"%>
-<%@page import="java.awt.datatransfer.MimeTypeParseException"%>
 <%@page import="java.io.FileInputStream"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -52,15 +51,15 @@
 	//ie - 한글처리
 	
 	// 사용자의 브라우저 정보 확인
-	String agent = request.getHeader("User- Agent");
+	String agent = request.getHeader("User-Agent");
 	
 	//indexOf("문자") : 문자가 포함되어 있을 때 해당 위치 index 리턴,
 	// 불포함 되어있을 때 -1 리턴
 	boolean ieBrowser = (agent.indexOf("MSIE")> -1) || (agent.indexOf("Trident")>-1);
 	
-	if(ieBroswer){
+	if(ieBrowser){
 		//ie 일때
-		URLEncoder.encode(fileName,"UTF-8").replaceAll("\\+","%20");
+		fileName = URLEncoder.encode(fileName,"UTF-8").replaceAll("\\+","%20");
 	} else{
 		//ie 아닐 때
 		fileName = new String(fileName.getBytes("UTF-8"),"iso-8859-1");
@@ -70,14 +69,20 @@
 	// 모든 파일을 다운로드 형태로 처리
 	response.setHeader("Content-Disposition", "attachment; filename="+fileName);
 	
+	//기본생성되는 내장객체 out 처리
+	out.clear();
+	out = pageContext.pushBody();
 	//다운로드
 	//다운로드 하기위한 준비 (통로 생성)
 	ServletOutputStream out2 = response.getOutputStream();
 	
 	int data=0;
-	while((data=fis.read(b,0,b.length)) != -1){
+	while((data=fis.read(b,0,b.length)) != -1){ //-1 : 파일의 끝
 		out2.write(b,0,data);
 	}
+	
+	// 배열을 사용하여 정보 전달(버퍼사용)
+	//=> 배열의 빈공간에 공백을 채워서 정보 전달
 	out2.flush();
 	out2.close();
 	fis.close();

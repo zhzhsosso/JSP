@@ -53,6 +53,7 @@
     %>
     
     <h3><a href="writeForm.jsp">글 쓰기</a></h3>
+    <h3><a href="fwriteForm.jsp">파일 글 쓰기</a></h3>
     
     <table border="1">
        <tr>
