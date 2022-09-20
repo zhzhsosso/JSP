@@ -468,5 +468,4 @@ public class BoardDAO {
 	}
 	//답글쓰기 - reInsertBoard(DTO)
 	
-
 }// class

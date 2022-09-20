@@ -14,8 +14,7 @@
 		메세지 : <input type="text" name="msg"><br>
 		첨부파일 : <input type="file" name="file"><br>
 		
-		<input type="submit" value="파일업로드">
-		
+		<input type="submit" value="파일업로드">	
 	</form>
 </body>
 </html>

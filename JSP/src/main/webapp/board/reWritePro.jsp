@@ -27,8 +27,7 @@
 		dao.reInsertBoard(dto);
 		
 		//리스트 페이지로 이동
-		response.sendRedirect("boardList.jsp");
-		
+		response.sendRedirect("boardList.jsp");	
 	%>
 </body>
 </html>

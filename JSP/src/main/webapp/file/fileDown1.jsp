@@ -78,7 +78,6 @@
 	while((data=fis.read(b,0,b.length)) != -1){
 		out2.write(b,0,data);
 	}
-	
 	out2.flush();
 	out2.close();
 	fis.close();

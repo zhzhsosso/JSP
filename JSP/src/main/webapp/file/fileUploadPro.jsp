@@ -41,8 +41,7 @@
 		String o_file = multi.getOriginalFileName("file");
 		
 		System.out.println("파일명 : "+file);
-		System.out.println("파일명_o : "+o_file);
-		
+		System.out.println("파일명_o : "+o_file);	
 		
 	%>
 	<a href="fileDown1.jsp?file_name=<%=o_file%>">다운로드 페이지 이동1</a>
