@@ -48,6 +48,26 @@
 	취미3 : <%=hobbys[2] %><br>
 	
 	<hr>
+	<%
+	if(hobbys != null){
+		
+		for(int i=0;i<hobbys.length;i++){
+			%>
+			취미<%= i+1%> : <%=hobbys[i] %><br>
+			<% 	
+		}
+		%>
+		<hr>
+		<%
+		for(String h:hobbys){
+			%>
+			취미 : <%=h %><br>
+			<%
+		}
+	}
+	%>
+	
+	<hr>
 	[el]<br>
 	취미1 : ${paramValues.hobby[0] }<br>
 	취미2 : ${paramValues.hobby[1] }<br>
