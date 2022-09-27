@@ -26,9 +26,10 @@
 	전화번호 :<%=p.getP().getTel() %>
 	전화번호 :<%=iPhone.getTel() %>
 	
-	[el]
-	${requestScope.person.name }
-	${requestScope.person.age }
-	${requestScope.person.p.tel }
+	<hr>
+	[el] set/get 없이 변수명으로 호출<br>
+	${requestScope.person.name }<br>
+	${requestScope.person.age }<br>
+	${requestScope.person.p.tel }<br>
 </body>
 </html>
