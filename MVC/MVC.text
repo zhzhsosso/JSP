@@ -1,0 +1,29 @@
+model2방식으로 개발( 디자인 영역과 비즈니스 로직의 분리)
+
+
+MVC 패턴 활용
+
+
+* MVC 패턴
+
+Model : 비지니스 로직처리(디비 사용) / .java 파일 (P lang O ld J ava O bject)
+
+View :  화면 UI (디비 사용x) / .jsp
+
+Controller : model, view 사이의 연결 / .java (Servlet)
+
+
+
+사용자 요청 -> web.xml -> C <-> M <-> Mysql/Oracle
+           (배포서술자)   |
+           				  V
+
+
+사용자 요청 -> web.xml -> FC <-> M[ C / M(DAO)] <-> Mysql/Oracle
+           (배포서술자)   |
+           				  V
+
+
+* 관심사의 분리 => 일을 따로한다. 하나의 목표를 위해서
+
+=> 좋은코드
