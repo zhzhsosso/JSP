@@ -6,6 +6,12 @@ public class ActionForward {
 	
 	private String path; //이동주소
 	private boolean isRedirect; //이동방법
+//  이동방법 - true : redirect방식 이동 
+	//            - false : forward방식 이동
+	
+	public ActionForward() {
+		System.out.println(" 페이지 이동 준비 (티켓준비)");
+	}
 	
 	public String getPath() {
 		return path;
@@ -20,12 +26,8 @@ public class ActionForward {
 		this.isRedirect = isRedirect;
 	}
 	
-	//이동방법 - true : redirect 방식 이동
-//				- false : forward방식 이동
+
 	
-	public ActionForward() {
-		System.out.println("페이지 이동준비");
-	}
 	
 	
 }

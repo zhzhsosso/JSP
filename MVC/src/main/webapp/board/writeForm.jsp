@@ -7,10 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>writeForm.jsp</h1>
+	<h1>writeForm.jsp(MVC)</h1>
 	
 	<fieldset>
-		<form action="writePro.jsp" method="post">
+		<form action="./BoardWriteAction.bo" method="post">
 			제목 : <input type="text" name="subject"><br>
 			작성자 : <input type="text" name="name"><br>
 			비밀번호 : <input type="password" name="pass"><br>

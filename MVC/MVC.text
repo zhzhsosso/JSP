@@ -27,3 +27,23 @@ Controller : model, view 사이의 연결 / .java (Servlet)
 * 관심사의 분리 => 일을 따로한다. 하나의 목표를 위해서
 
 => 좋은코드
+
+
+* 추상클래스 : 객체를 생성할 수 없는 클래스 (자생력이 없음)
+		=> 상속 관계를 사용해서 객체를 사용
+  추상 메서드 : body{}가 없는 메서드 => 실행할 코드가 없는 메서드 (실행 X, 호출
+  		public abstract void method();
+  		*상속관걜르 사용할경우 반드시 추상메서드는 오버라이딩 해서 사용(강제성)
+  		public void method(){
+  		
+  		}
+  		
+	abstract class 클래스명{
+		변수,상수
+		메서드,추상메서드
+	}
+* 인터페이스(interface)
+	interface 인터페이스명{
+		상수
+		추상메서드
+	}

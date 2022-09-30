@@ -41,6 +41,7 @@ public class BoardFrontController extends HttpServlet{
 		///////////////////2. 가상주소매핑//////////////////////
 		System.out.println("C : 2단계시작 가상주소 매핑 시작---------------");
 		
+		Action action = null;
 		ActionForward forward = null;
 		
 		if(command.equals("/BoardWrite.bo")) {
@@ -51,6 +52,24 @@ public class BoardFrontController extends HttpServlet{
 			forward.setPath("./board/writeForm.jsp");
 			forward.setRedirect(false);
 		}
+		else if(command.equals("/BoardWriteAction.bo")) {
+			System.out.println(" C : /BoardWriteAction.bo 호출");
+			System.out.println("C : [패턴2] DB사용 O, 페이지 이동(화면전환)");
+			
+			//BoardWriteAction() 객체생성
+			//강한결합 (결합도 높다)
+//			BoardWriteAction bwa = new BoardWriteAction();
+			//약한결합 (결합도 낮다)
+			action = new BoardWriteAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
 		
 		
 		System.out.println("C : 2단계끝 가상주소 매핑 완료---------------");
@@ -60,11 +79,11 @@ public class BoardFrontController extends HttpServlet{
 		System.out.println("C : 3단계시작 페이지 이동 시작---------------");
 		
 		if(forward != null) { //이동정보가 있을 때(티켓이 있을 때)
-			if(forward.isRedirect() == true) {//true
-				System.out.println("C: 이동방식 : "+forward.getPath());
+			if(forward.isRedirect()) {//true
+				System.out.println("C: 이동방식 : "+forward.isRedirect()+",주소 : "+forward.getPath());
 				response.sendRedirect(forward.getPath());
 			}else {//false
-				System.out.println("C : 이동방식 : "+forward.isRedirect()+",");
+				System.out.println("C : 이동방식 : "+forward.isRedirect()+",주소 : "+forward.getPath());
 				
 				RequestDispatcher dis = request.getRequestDispatcher(forward.getPath());
 				dis.forward(request, response);
@@ -81,14 +100,14 @@ public class BoardFrontController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest request, 
 			HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("BoradFrontController - doGet() 호출");
+		System.out.println("\n\nBoardFrontController - doGet() 호출");
 		doProcess(request, response);
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest request, 
 			HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("BoradFrontController - doPost() 호출");
+		System.out.println("\n\nBoarddFrontController - doPost() 호출");
 		doProcess(request, response);
 	}
 
