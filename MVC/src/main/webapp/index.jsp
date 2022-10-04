@@ -16,7 +16,8 @@
 	<%
 // 		response.sendRedirect("./board");
 // 	response.sendRedirect("./test.bo");
-	response.sendRedirect("./BoardWrite.bo");
+// 	response.sendRedirect("./BoardWrite.bo");
+	response.sendRedirect("./BoardList.bo");
 	%>
 </body>
 </html>

@@ -69,6 +69,19 @@ public class BoardFrontController extends HttpServlet{
 				e.printStackTrace();
 			}
 			
+		}else if(command.equals("/BoardList.bo")) {
+			System.out.println("C: /BoardList.bo 호출");
+			System.out.println("C: [패턴3] db사용o, view출력");
+			
+			//BoardListAction 객체 생성
+			action = new BoardListAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				
+				e.printStackTrace();
+			}
 		}
 		
 		
