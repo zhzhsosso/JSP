@@ -48,14 +48,15 @@ public class BoardListAction implements Action{//같은패키지이므로 import
 		
 		
 		//디비에 전체 글 리스트 가져오기
-		ArrayList boardListAll = dao.getBoardList();
+//		ArrayList boardListAll = dao.getBoardList();
+		ArrayList boardListAll = dao.getBoardList(startRow,pageSize);
 		
 //		System.out.println("M : "+boardListAll); //내용 다찍힘 >느려짐
 		
 		
 		/////////////////////////////////////////////////////////////////
 		// 페이징 처리 (2)
-		
+//	    if(cnt != 0){ // 글이 있을때
 		// 총 페이지 = 글개수(총량) / 페이지당 출력
 		//    => 만약에 나머지가 있을때 페이지 1개 추가
 		
@@ -73,7 +74,7 @@ public class BoardListAction implements Action{//같은패키지이므로 import
 		if(endPage > pagecnt){
 		endPage = pagecnt; 
 		}
-		
+//	    }
 		/////////////////////////////////////////////////////////////////
 		
 		

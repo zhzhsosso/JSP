@@ -23,6 +23,7 @@
 		//1. 드라이버 로드
 		
 		Class.forName("com.mysql.cj.jdbc.Driver");
+		//mysql-connector-java6이상
 		
 		System.out.println("드라이버 로드 성공!");
 		

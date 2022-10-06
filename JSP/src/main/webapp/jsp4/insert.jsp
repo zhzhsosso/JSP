@@ -19,7 +19,7 @@
 		//0. 드라이브설치 -생략
 		
 		//디비연결정보 (상수)
-		final String DRIVER = "com.mysql.cj.jdbc.Driver";
+		final String DRIVER = "com.mysql.cj.jdbc.Driver"; 
 		final String DBURL = "jdbc:mysql://localhost:3306/jspdb";
 		final String DBID = "root";
 		final String DBPW = "1234";

@@ -30,7 +30,7 @@
 		Connection con = DriverManager.getConnection(DBURL,DBID,DBPW);
 		
 		//3. sql 작성(select) & pstmt
-		String sql = "select * from itwill_member where idx = 12";
+		String sql = "select * from itwill_member where id = 2";
 		PreparedStatement pstmt = con.prepareStatement(sql);
 		
 		//4. sql 작성
@@ -46,7 +46,7 @@
 	
 	%>
 	<form action="updatePro.jsp" method="post">
-		<input type ="hidden" name="idx" value ="12"><br>
+		<input type ="hidden" name="id" value ="2"><br>
 		이름 : <input type ="text" name = "name" value = "<%=name%>"><br>
 <%-- 		성별 : <input type ="text" name = "gender" value = "<%=gender%>"><br> --%>
 		나이 : <input type ="text" name = "age" value = "<%=age%>"><br>

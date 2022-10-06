@@ -18,7 +18,7 @@
 		
 		String name = request.getParameter("name");
 		int age = Integer.parseInt(request.getParameter("age"));
-		int idx = Integer.parseInt(request.getParameter("idx"));
+		int id = Integer.parseInt(request.getParameter("id"));
 	
 	%>
 	
@@ -41,11 +41,11 @@
 		
 		//3. sql 작성
 		//sql - 1번 유저가 존재하는지 아닌지 판단 (회원인지)
-		String sql = "select * from itwill_member where idx = ?";
+		String sql = "select * from itwill_member where id = ?";
 		PreparedStatement pstmt = con.prepareStatement(sql);
 		
 		/// ???
-		pstmt.setInt(12, idx);
+		pstmt.setInt(1, id);
 		
 		//4. sql 실행
 		ResultSet rs = pstmt.executeQuery();
@@ -57,13 +57,13 @@
 			//회원
 			//sql - update(1번 유저의 이름,나이 수정)
 			//3.sql 생성 & pstmt 다시 생성
-			sql = "update itwill_member set name=?,age=? where idx=?";
+			sql = "update itwill_member set name=?,age=? where id=?";
 			pstmt = con.prepareStatement(sql);
 			
 			//???
 			pstmt.setString(1,name);
 			pstmt.setInt(2,age);
-			pstmt.setInt(3,idx);
+			pstmt.setInt(3,id);
 			
 			//4.sql 실행
 			pstmt.executeUpdate();

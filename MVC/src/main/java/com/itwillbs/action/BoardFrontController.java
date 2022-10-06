@@ -82,7 +82,50 @@ public class BoardFrontController extends HttpServlet{
 				
 				e.printStackTrace();
 			}
-		}
+			
+			
+		}else if(command.equals("/BoardContent.bo")) {
+			System.out.println("C : /BoardContent.bo 호출");
+			System.out.println("C : [패턴3] DB 사용, view 출력");
+			
+			//BoardContentAction 객체 생성
+			action = new BoardContentAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}//BoardContent.bo
+		else if(command.equals("/BoardUpdate.bo")) { //주소에 . 붙으면 안됨
+			System.out.println("C : /BoardUpdate.bo 호출");
+			System.out.println("C : [패턴3] DB 사용, view 출력");
+			
+			//BoardUpdateAction 객체 생성
+			action = new BoardUpdateAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}//BoardUpdate.bo
+		else if(command.equals("/BoardUpdateProAction.bo")) { //주소에 . 붙으면 안됨
+			System.out.println("C : /BoardUpdateProAction.bo 호출");
+			System.out.println("C : [패턴3] DB 사용, 페이지이동(화면전환)");
+			
+			//BoardUpdateAction 객체 생성
+			action = new BoardUpdateProAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}//BoardUpdateProAction
 		
 		
 		System.out.println("C : 2단계끝 가상주소 매핑 완료---------------");

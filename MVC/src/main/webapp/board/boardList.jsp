@@ -15,13 +15,12 @@
 <%-- 	<%=request.getAttribute("boardListAll") %> --%>
 <%-- 	${requestScope.boardListAll } --%>
 
-	<h3><a href="./BoardWrite.bo">글쓰기</a></h3>
+	<h3><a href="./BoardWrite.bo">글쓰기 (얘드라글좀써라)</a></h3>
 	
 	
 	<h3>전체 글 개수 : ${requestScope.totalCnt } 개</h3>
 	
 	
-
 	<table border="1">
 		<tr>
 			<td>번호</td>
@@ -34,7 +33,9 @@
 		<c:forEach var ="dto" items="${boardListAll }">
 			<tr>
 				<td>${dto.bno }</td>
-				<td>${dto.subject }</td>
+				<td>
+					<a href="./BoardContent.bo?bno=${dto.bno }&pageNum=${pageNum}">${dto.subject }</a>
+				</td>
 				<td>${dto.name }</td>
 				<td>${dto.readcount }</td>
 				<td>${dto.date }</td>
@@ -42,6 +43,23 @@
 			</tr>
 		</c:forEach>
 	</table>
+	
+	<c:if test="${totalCnt !=0 }">
+		<!-- 이전 -->
+		<c:if test="${startPage > pageBlock }">
+			<a href="./BoardList.bo?pageNum=${startPage-pageBlock }">[이전]</a>
+		</c:if>
+		
+		<!-- 숫자 페이지번호 -->
+		<c:forEach var="i" begin="${startPage }" end="${endPage }" step="1">
+			<a href="./BoardList.bo?pageNum=${i }">${i }</a>
+		</c:forEach>
+		
+		<!-- 다음 -->
+		<c:if test="${endPage < pageCount }">
+			<a href="./BoardList.bo?pageNum=${startPage+pageBlock }">[다음]</a>
+		</c:if>
+	</c:if>
 	
 </body>
 </html>
