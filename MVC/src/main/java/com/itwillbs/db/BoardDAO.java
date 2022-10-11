@@ -393,45 +393,50 @@ public class BoardDAO {
 		}
 		// 게시글 수정 - updateBoard(DTO)
 		
-		//게시판 글 삭제 - deleteBoard(bno,pass)
-		public int deleteBoard(BoardDTO dto) {
-			int result = -1;//임의로 초기화
+		// 게시판 글 삭제 - deleteBoard(bno,pass)
+		public int deleteBoard(int bno,String pass) {
+			int result = -1;
 			
 			try {
+				// 1.2. 디비 연결
 				con = getConnection();
-				
+				// 3. sql 작성(select) & pstmt 객체
 				sql = "select pass from itwill_board where bno=?";
-				
 				pstmt = con.prepareStatement(sql);
-				
-				pstmt.setInt(1, dto.getBno());
-				
+				// ???
+				pstmt.setInt(1, bno);
+				// 4. sql 실행
 				rs = pstmt.executeQuery();
-				
+				// 5. 데이터 처리
 				if(rs.next()) {
-					if(dto.getPass().equals(rs.getString("pass"))) {
-						//비밀번호가 맞을때 삭제한다
-						sql="delete from itwill_board where bno=?";
+					if(pass.equals(rs.getString("pass"))) {
+						// 3. sql 작성(delete) & pstmt 객체
+						sql = "delete from itwill_board where bno=?";
 						pstmt = con.prepareStatement(sql);
-				
-						pstmt.setInt(1, dto.getBno());
 						
-						result = pstmt.executeUpdate();
+						pstmt.setInt(1, bno);
+						// 4. sql 실행
+						result = pstmt.executeUpdate();					
 					}else {
+						// 비밀번호 오류
 						result = 0;
-					}
+					}				
 				}else {
-					result=-1;
+					// 게시판글 없음
+					result = -1;
 				}
 				
+				System.out.println(" DAO : 게시판 정보 삭제완료 ("+result+")");
+				
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}finally {
+			} finally {
 				closeDB();
 			}
+			
 			return result;
-		}//게시판 글 삭제 - deleteBoard(bno,pass)
+		}
+		// 게시판 글 삭제 - deleteBoard(bno,pass)
 		
 		//답글쓰기 - reInsertBoard(DTO)
 		public void reInsertBoard(BoardDTO dto) {

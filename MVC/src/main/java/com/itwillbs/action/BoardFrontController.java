@@ -122,10 +122,83 @@ public class BoardFrontController extends HttpServlet{
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
+				
 				e.printStackTrace();
 			}
 		}//BoardUpdateProAction
+		else if(command.equals("/BoardDelete.bo")) { //주소에 . 붙으면 안됨
+			System.out.println("C : /BoardDelete.bo 호출");
+			System.out.println("C : [패턴1] DB 사용 x, view 페이지 이동");
+			
+			forward = new ActionForward();
+			forward.setPath("./board/deleteForm.jsp");
+			forward.setRedirect(false);
+			
+			
+		}//BoardDelete.bo
+		else if(command.equals("/BoardDeleteAction.bo")) {
+			System.out.println("C: /BoardDeleteAction.bo 호출");
+			System.out.println("C : [패턴2] DB 사용 o, 페이지 이동(화면전환)");
+			
+			//BoardDeleteAction() 객체
+			action = new BoardDeleteAction();
+			
+			try {
+				forward = action.execute(request, response);
+				//다형성
+			} catch (Exception e) {
+		
+				e.printStackTrace();
+			}
+		}//BoardDeleteAction.bo
+		else if(command.equals("/BoardReWrite.bo")) {
+			System.out.println("C : /BoardReWrite.bo 호출");
+			System.out.println("C :[패턴1] DB 사용 X, view 페이지 이동");
+			
+			forward = new ActionForward();
+			forward.setPath("./board/reWriteForm.jsp");
+			forward.setRedirect(false);
+		}//BoardReWrite
+		else if(command.equals("/BoardReWriteAction.bo")) {
+			System.out.println("C : /BoardReWriteAction.bo 호출");
+			System.out.println("C :[패턴2] DB 사용 O, 페이지 이동(화면전환)");
+			
+			//BoardReWriteAction()객체 - execute()
+			
+			try {
+				action = new BoardReWriteAction();
+				forward = action.execute(request, response);
+				
+//				forward = new BoardReWriteAction().execute(request, response);
+				//나쁜코드! garbage 생성함 
+				
+			} catch (Exception e) {
+				
+				e.printStackTrace();
+			}
+		}//BoardReWriteAction
+		else if(command.equals("/BoardFileWrite.bo")) {
+			System.out.println("C : /BoardFileWrite.bo 호출");
+			System.out.println("C :[패턴1] DB 사용 X, view 페이지 이동");
+			
+			forward = new ActionForward();
+			forward.setPath("./board/fWriteForm.jsp");
+			forward.setRedirect(false);
+		}//BoardFIleWrite
+		else if(command.equals("/BoardFileWriteAction.bo")) {
+			System.out.println("C : /BoardFileWriteAction.bo 호출");
+			System.out.println("C :[패턴2] DB 사용 O, 페이지 이동(화면전환)");
+			
+			//BoardFileWriteAction() 객체 생성
+			action = new BoardFileWriteAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		
 		
 		System.out.println("C : 2단계끝 가상주소 매핑 완료---------------");

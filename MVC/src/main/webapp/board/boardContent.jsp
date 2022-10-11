@@ -61,8 +61,8 @@
          <td colspan="4">
              <input type="button" value="수정" 
                     onclick=" location.href='./BoardUpdate.bo?bno=${dto.bno }&pageNum=${pageNum }'; ">
-             <input type="button" value="삭제" onclick="location.href='deleteForm.jsp?bno=<%=dto.getBno()%>&pageNum=<%=pageNum%>';">
-             <input type="button" value="답글" onclick="location.href='reWriteForm.jsp?bno=<%=dto.getBno()%>&re_ref=<%=dto.getRe_ref()%>&re_lev=<%=dto.getRe_lev() %>&re_seq=<%=dto.getRe_seq()%>';">
+             <input type="button" value="삭제" onclick="location.href='./BoardDelete.bo?bno=${dto.bno }&pageNum=${pageNum }';">
+             <input type="button" value="답글" onclick="location.href='./BoardReWrite.bo?bno=${dto.bno }&re_ref=${dto.re_ref }&re_lev=${dto.re_lev }&re_seq=${dto.re_seq }';">
              <input type="button" value="목록" 
                      onclick=" location.href='./BoardList.bo?pageNum=${pageNum}';">
          </td>

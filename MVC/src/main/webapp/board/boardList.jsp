@@ -16,6 +16,7 @@
 <%-- 	${requestScope.boardListAll } --%>
 
 	<h3><a href="./BoardWrite.bo">글쓰기 (얘드라글좀써라)</a></h3>
+	<h3><a href="./BoardFileWrite.bo">파일업로드 글쓰기 (얘드라글좀써라)</a></h3>
 	
 	
 	<h3>전체 글 개수 : ${requestScope.totalCnt } 개</h3>
@@ -34,7 +35,16 @@
 			<tr>
 				<td>${dto.bno }</td>
 				<td>
-					<a href="./BoardContent.bo?bno=${dto.bno }&pageNum=${pageNum}">${dto.subject }</a>
+					<c:if test="${dto.re_lev > 0}">
+						<img src="./img/level.gif" width="${dto.re_lev * 10 }">
+						<img src="./img/re.gif">
+					</c:if>
+					<a href="./BoardContent.bo?bno=${dto.bno }&pageNum=${pageNum}">
+						${dto.subject }
+						<c:if test="${dto.file != null }">
+							<img src="./img/save.png" width="15" height="15">
+						</c:if>
+					</a>
 				</td>
 				<td>${dto.name }</td>
 				<td>${dto.readcount }</td>
