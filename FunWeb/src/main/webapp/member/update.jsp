@@ -23,23 +23,21 @@
  </script>
  <![endif]-->
  <script type="text/javascript">
-	 function winopen(){
-		 alert('아이디 중복체크 시작');
-		 
-		 // 아이디창에 아이디가 입력여부 확인
-		 if(document.fr.id.value == ""){
-			 alert('아이디를 입력하세요!');
-			 document.fr.id.focus();
-			 return;
-		 }
-		 
-		 // 입력된 아이디정보
-		 var inputID = document.fr.id.value;
-		 
-		 // 새창열기
-		 window.open("./MemberIdCheck.me?inputID="+inputID,"","width=400,height=200,top=300,left=500");
-		 
-	 }
+ 	function checkPw(){
+ 		alert('데이터 유효성체크 완료');
+ 		
+ 		// 비밀번호 입력 x -> submit (x)
+ 		var pw = document.forms[0].pw.value;
+ 		//alert(pw);
+ 		if(pw == ""){
+ 			alert('비밀번호를 입력해주세요.');
+ 			document.fr.pw.focus();
+ 			return false;
+ 		}
+ 		
+ 	}
+ 
+ 
  </script>
  
  
@@ -65,47 +63,53 @@
 <!-- 왼쪽메뉴 -->
 <!-- 본문내용 -->
 	<article>
-			<h1>회원 가입</h1>
-			<form action="./MemberJoinAction.me"  method="post" id="join" 
-			      name="fr"  onsubmit="alert('데이터 유효성체크 완료');">
+			<h1>회원 정보 수정</h1>
+			<form action="./MemberUpdatePro.me"  method="post" id="join" 
+			      name="fr"  onsubmit=" return checkPw(); ">
 				<fieldset>
 					<legend>기본정보</legend>
-					<label>아이디</label> <input type="text" name="id" class="id">
-					<input type="button" value="중복체크" class="dup" onclick="winopen();"><br>
+					<label>아이디</label> <input type="text" name="id" class="id" value="${dto.id }" readonly><br>
 					<label>비밀번호</label> <input type="password" name="pw"><br>
-					<label>이 름</label> <input type="text" name="name"><br>
-					<label>E-Mail</label> <input type="email" name="email"><br>
-					<label>주소</label> <input type="text" name="addr"><br>
-					<label>연락처</label> <input type="text" name="tel"><br>
+					<label>이 름</label> <input type="text" name="name" value="${dto.name }"><br>
+					<label>E-Mail</label> <input type="email" name="email" value="${dto.email }" readonly><br>
+					<label>주소</label> <input type="text" name="addr" value="${dto.addr }"><br>
+					<label>연락처</label> <input type="text" name="tel" value="${dto.tel }"><br>
 					<label>생년월일</label> 
 					    <select name="birth">
-					       <option>년</option>
+					       <option value="${dto.birth.split('-')[0] }">${dto.birth.split("-")[0] }년</option>
 					       <c:forEach var="y" begin="2000" end="2022" step="1">
 					       		<option value="${y }">${y }년</option>
 					       </c:forEach>
 					    </select>
 					     <select name="birth">
-					       <option>월</option>
+					       <option value="${dto.birth.split('-')[1] }">${dto.birth.split('-')[1] }월</option>
 					       <c:forEach var="m" begin="1" end="12" step="1">
 					       		<option value="${m }">${m }월</option>					       
 					       </c:forEach>
 					    </select>
 					     <select name="birth">
-					       <option>일</option>
+					       <option value="${dto.birth.split('-')[2] }">${dto.birth.split('-')[2] }일</option>
 					        <c:forEach var="d" begin="1" end="31" step="1">
 					       		<option value="${d }">${d }일</option>					       
 					       </c:forEach>
 					    </select>
 					<hr>
 					<label>성별</label> 
-					    <input type="radio" name="gender" value="남">남 
-					    <input type="radio" name="gender" value="여">여 
+					    <input type="radio" name="gender" value="남" 
+					      <c:if test="${dto.gender == '남' }">
+					         checked
+					      </c:if>
+					    >남 
+					    <input type="radio" name="gender" value="여" 
+					      <c:if test="${dto.gender == '여' }">
+					         checked
+					      </c:if>
+					    >여 
 					<br>
-					
 				</fieldset>
 				<div class="clear"></div>
 				<div id="buttons">
-					<input type="submit" value="회원가입" class="submit">
+					<input type="submit" value="회원수정" class="submit">
 					<input type="reset" value="초기화" class="cancel">
 				</div>
 			</form>

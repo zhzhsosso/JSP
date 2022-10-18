@@ -34,7 +34,7 @@ float: right;}
 /*너비 600px 밖여백 50px 20px 0 0 정렬 오른쪽*/
 nav#top_menu ul{list-style:none;
 font-family: verdana,Geneba,sans-serif;
-font-size: 15px;font-weight: 100;color: #333}
+font-size: 15px;font-weight: 70;color: #333}
 /*스타일없음 글자체 verdana,Geneba,sans-serif 
 글자크기 13px 글자굵기 100 글자색 #333*/
 nav#top_menu li{float: left;margin: 0 5px;}
@@ -54,7 +54,7 @@ nav#top_menu a:hover{
 src: url("../images/segoeui.eot");
 src: local(""),
      url("../images/segoeui.woff")format("woff"),
-     url("../images/segoeui.ttf")format("truetype");
+     url("../images/segoeui.ttf")format("truetype");}
 footer{margin: 50px 0 0 0; height: 80px;
 background-image: url("../images/under_logo.gif");
 background-repeat: no-repeat;

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,11 +22,17 @@
 
  </script>
  <![endif]-->
+ <script type="text/javascript">
+	
+ </script>
+ 
+ 
 </head>
 <body>
 <div id="wrap">
 <!-- 헤더들어가는 곳 -->
 	<jsp:include page="../inc/top.jsp"/>
+	<!-- 추가할 페이지를 컴파일후 페이지를 추가 -->
 <!-- 헤더들어가는 곳 -->
 
 <!-- 본문들어가는 곳 -->
@@ -34,37 +41,36 @@
 <!-- 본문메인이미지 -->
 <!-- 왼쪽메뉴 -->
 <nav id="sub_menu">
-<ul>
-<li><a href="./MemberJoin.me">Join us</a></li>
-<li><a href="#">Privacy policy</a></li>
-</ul>
+	<ul>
+		<li><a href="./MemberUpdate.me">회원정보 수정</a></li>
+		<li><a href="./MemberDelete.me">회원정보 삭제</a></li>
+	</ul>
 </nav>
 <!-- 왼쪽메뉴 -->
 <!-- 본문내용 -->
-		<article>
-			<h1>로그인</h1>
-			<form action="./MemberLoginAction.me" id="join" method="post" 
-			       onsubmit=" alert(' 입력정보 체크 '); "		        >
+	<article>
+			<h1>회원 탈퇴</h1>
+			<form action="./MemberDelteAction.me"  method="post" id="join" 
+			      name="fr"  onsubmit="alert('데이터 유효성체크 완료');">
+			      
 				<fieldset>
-					<legend>Login Info</legend>
-					<label>아 이 디</label> <input type="text" name="id"><br>
+					<input type="hidden" name ="id" value="${sessionScope.id }">
 					<label>비밀번호</label> <input type="password" name="pw"><br>
 				</fieldset>
+				
 				<div class="clear"></div>
 				<div id="buttons">
-					<input type="submit" value="로그인" class="submit">
-					<input type="button" value="회원가입" class="cancel" 
-					       onclick=" location.href='./MemberJoin.me';"
-					 >
+					<input type="submit" value="회원탈퇴" class="submit">
+
 				</div>
 			</form>
 		</article>
-		<!-- 본문내용 -->
+<!-- 본문내용 -->
 <!-- 본문들어가는 곳 -->
 
 <div class="clear"></div>
 <!-- 푸터들어가는 곳 -->
-	<jsp:include page="../inc/bottom.jsp"/>
+	<jsp:include page="../inc/bottom.jsp" />
 <!-- 푸터들어가는 곳 -->
 </div>
 </body>

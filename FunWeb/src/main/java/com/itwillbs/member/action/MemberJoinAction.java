@@ -1,7 +1,5 @@
 package com.itwillbs.member.action;
 
-import java.util.Iterator;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -32,8 +30,8 @@ public class MemberJoinAction implements Action {
 //		System.out.println(" M : birthArr[1] : "+birthArr[1]);
 //		System.out.println(" M : birthArr[2] : "+birthArr[2]);
 
-		if(birthArr != null) { // 99.1.2
-			dto.setBirth(birthArr[0]+"."+birthArr[1]+"."+birthArr[2]);
+		if(birthArr != null) { // 99-1-2
+			dto.setBirth(birthArr[0]+"-"+birthArr[1]+"-"+birthArr[2]);
 		}
 		
 		System.out.println(" M : dto : "+dto);
@@ -41,14 +39,12 @@ public class MemberJoinAction implements Action {
 		// DAO 객체 생성 - 회원가입 메서드 호출
 		MemberDAO dao = new MemberDAO();
 		dao.memberJoin(dto);
-		System.out.println("M : 회원가입 성공");
+		System.out.println(" M : 회원가입 성공! ");
 		
-		//페이지 이동(준비)
+		// 페이지 이동(준비)
 		ActionForward forward = new ActionForward();
 		forward.setPath("./MemberLogin.me");
 		forward.setRedirect(true);
-		
-		// 페이지 이동		
 		
 		return forward;
 	}
