@@ -63,6 +63,48 @@ public class AdminGoodsFrontController extends HttpServlet {
 			}
 			
 		}
+		else if(command.equals("/adminGoodsModify.ag")) {
+			System.out.println("C : /adminGoodsModify.ag 호출");
+			System.out.println("C : 패턴 3");
+			
+			//adminGoodsModifyAction()
+			action = new adminGoodsModifyAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}	
+		}
+		else if(command.equals("/AdminGoodsModifyPro.ag")) {
+			System.out.println("C : /AdminGoodsModifyPro.ag 호출");
+			System.out.println(" C : 패턴 2");
+			
+			//AdminGoodsModifyProAction
+			action = new AdminGoodsmodifyProAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		else if(command.equals("/adminGoodsRemove.ag")) {
+			System.out.println("C : /adminGoodsRemove.ag 호출");
+			System.out.println("C : 패턴2");
+			
+			//adminGoodsRemoveAction
+			action = new AdminGoodsRemoveAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
 		System.out.println("C : 2. 가상주소 매핑 끝");
 		
 		

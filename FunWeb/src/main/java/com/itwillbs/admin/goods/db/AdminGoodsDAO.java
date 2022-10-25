@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -108,85 +109,150 @@ public class AdminGoodsDAO {
 	}
 	// 상품등록 메서드
 	
-	//상품 전체 개수 확인 - getGoodsCount()
-	public int getGoodsCount() {
-		int cnt = 0;
+	//상품 리스트 - getAdminGoodsList()
+	public List getAdminGoodsList() {
+		List adminGoodsList = new ArrayList();
 		
+		//1.2. 디비연결
 		try {
-			//1.2 디비연결
 			con = getConnection();
 			
-			//3.sql
-			sql = "select count(*) from itwill_goods";
+			//3. sql 작성 & pstmt 객체
+			sql ="select * from itwill_goods ";
 			pstmt = con.prepareStatement(sql);
 			
-			//4. sql 실행
+			//4.sql 실행
 			rs = pstmt.executeQuery();
 			
-			//5. 데이터처리
-			if(rs.next()) {
-//				cnt = rs.getInt(1);
-				cnt = rs.getInt("count(*)");
-			}
-			System.out.println("DAO: 전체 상품 개수 : "+cnt+"개");
+			//5. 데이터 처리
+			while(rs.next()) {
+				//DB -> DTO -> List
+				GoodsDTO dto = new GoodsDTO();
+				
+				dto.setAmount(rs.getInt("amount"));
+				dto.setBest(rs.getInt("best"));
+				dto.setCategory(rs.getString("category"));
+				dto.setColor(rs.getString("color"));
+				dto.setContent(rs.getString("content"));
+				dto.setDate(rs.getTimestamp("date"));
+				dto.setGno(rs.getInt("gno"));
+				dto.setImage(rs.getString("image"));
+				dto.setName(rs.getString("name"));
+				dto.setPrice(rs.getInt("price"));
+				dto.setSize(rs.getString("size"));
+				
+				adminGoodsList.add(dto);		
+			}//while
+			System.out.println("DAO : 관리자 상품리스트 저장완료");
+			System.out.println("DAO : "+adminGoodsList.size());
 			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			closeDB();
+		}
+				
+		return adminGoodsList;
+	}
+	//상품 리스트 - getAdminGoodsList()
+	
+	//상품1개의 정보를 가져오기 - getAdminGoods(gno)
+	public GoodsDTO getAdminGoods(int gno) {
+		GoodsDTO dto = null; //리턴해야되니 try밖에서 선언
+//		GoodsDTO dto = new GoodsDTO(); // 자원해제를 따로 하지 않기때문에 메모리 많이 잡아먹
+		
+		try {
+			con = getConnection();
+			sql="select * from itwill_goods where gno=?";
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, gno);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				dto = new GoodsDTO();
+				
+				dto.setAmount(rs.getInt("amount"));
+				dto.setBest(rs.getInt("best"));
+				dto.setCategory(rs.getString("category"));
+				dto.setColor(rs.getString("color"));
+				dto.setContent(rs.getString("content"));
+				dto.setDate(rs.getTimestamp("date"));
+				dto.setGno(rs.getInt("gno"));
+				dto.setImage(rs.getString("image"));
+				dto.setName(rs.getString("name"));
+				dto.setPrice(rs.getInt("price"));
+				dto.setSize(rs.getString("size"));
+				
+			}//if
+			
+			System.out.println("DAO : 상품정보 가져오기 완료");
+			
+		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
 			closeDB();
 		}
 		
-		return cnt;
+		return dto;
 	}
-	//상품 전체 개수 확인 - getGoodsCount()
+	//상품1개의 정보를 가져오기 - getAdminGoods(gno)
 	
-	// 글정보 가져오기 - getBoardList()
-	public ArrayList getGoodsList() {
-		System.out.println(" DAO : getGoodsList() 호출 ");
-		// 글정보 모두 저장하는 배열
-		ArrayList boardList = new ArrayList();
-		
+	//상품정보 수정메서드 - adminModifyGoods(DTO)
+	public void adminModifyGoods(GoodsDTO dto) {
 		try {
-			// 1.2. 디비연결
 			con = getConnection();
-			// 3. sql 작성(select) & pstmt 객체
-			sql = "select * from itwill_goods";
-			pstmt = con.prepareStatement(sql);
-			// 4. sql 실행
-			rs = pstmt.executeQuery();
-			// 5. 데이터 처리(DB->DTO->List)
-			while(rs.next()) {
-				
-				// DB -> DTO
-				GoodsDTO dto = new GoodsDTO();
-				dto.setGno(rs.getInt("gno"));
-				dto.setContent(rs.getString("content"));
-				dto.setName(rs.getString("name"));
-				dto.setAmount(rs.getInt("amount"));
-				dto.setBest(rs.getInt("best"));
-				dto.setCategory(rs.getString("catecory"));
-				dto.setColor(rs.getString("color"));
-				dto.setPrice(rs.getInt("price"));
-				dto.setSize(rs.getString("size"));
-				dto.setImage(rs.getString("img"));
-				
-				// DTO -> List
-				boardList.add(dto);
-				
-			}//while
 			
-			System.out.println(" DAO : 게시판 목록 저장완료! ");
+			sql="update itwill_goods set category=?, name=?,price=?,color=?,amount=?,size=?,content=?,best=? "
+					+"where gno=?";
+			
+			pstmt= con.prepareStatement(sql);
+			
+			pstmt.setString(1, dto.getCategory());
+			pstmt.setString(2, dto.getName());
+			pstmt.setInt(3, dto.getPrice());
+			pstmt.setString(4, dto.getColor());
+			pstmt.setInt(5, dto.getAmount());
+			pstmt.setString(6, dto.getSize());
+			pstmt.setString(7, dto.getContent());
+			pstmt.setInt(8, dto.getBest());
+			pstmt.setInt(9, dto.getGno());
+			
+			pstmt.executeUpdate();
+			
+			System.out.println("DAO : 관리자 상품정보 수정");
+			
 			
 		} catch (Exception e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} finally {
-			closeDB();
 		}
-		
-		return boardList;
 	}
-	// 글정보 가져오기 - getBoardList()
+	//상품정보 수정메서드 - adminModifyGoods(DTO)
+	
+	
+	//상품정보 삭제 메서드 - adminRemoveGoods(gno)
+	public void adminRemoveGoods(int gno) {
+		try {
+			con = getConnection();
+			
+			sql = "delete from itwill_goods where gno = ?";
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, gno);
+			
+			pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	//상품정보 삭제 메서드 - adminRemoveGoods(gno)
+
+	
+	
+	
 	
 	
 	
