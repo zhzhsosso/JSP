@@ -19,9 +19,9 @@
 	<nav id="top_menu">
 		<ul>
 			<li><a href="./Main.me">HOME</a></li>
-			<li><a href="./company/welcome.jsp">COMPANY</a></li>
+			<li><a href="./GoodsList.go">쇼핑몰</a></li>
 			<li><a href="#">SOLUTIONS</a></li>
-			<li><a href="./center/notice.jsp">CUSTOMER CENTER</a></li>
+			<li><a href="./AdminGoodsList.ag">관리자 페이지</a></li>
 			<li><a href="#">CONTACT US</a></li>
 		</ul>
 	</nav>

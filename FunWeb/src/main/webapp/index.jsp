@@ -9,7 +9,8 @@
    		//response.sendRedirect("./MemberJoin.me");
 //    		response.sendRedirect("./MemberLogin.me");
 // 		response.sendRedirect("./Main.me");
-   		response.sendRedirect("./AdminGoodsAdd.ag");
+//    		response.sendRedirect("./AdminGoodsAdd.ag");
+   		response.sendRedirect("./GoodsList.go");
    		
    
    %>
