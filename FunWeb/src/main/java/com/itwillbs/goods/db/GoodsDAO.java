@@ -167,4 +167,48 @@ public class GoodsDAO {
 		return goodsList;
 	}
 	//상품 리스트 - getGoodsList(item)
+	
+	//상품 상세정보 조회 - getGoods(gno)
+	public GoodsDTO getGoods(int gno) {
+		GoodsDTO dto = null;
+		
+		try {
+			con = getConnection();
+			
+			sql="select * from itwill_goods where gno=?";
+			pstmt= con.prepareStatement(sql);
+			
+			pstmt.setInt(1, gno);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				// DB -> DTO
+				dto = new GoodsDTO();
+				
+				dto.setAmount(rs.getInt("amount"));
+				dto.setBest(rs.getInt("best"));
+				dto.setCategory(rs.getString("category"));
+				dto.setColor(rs.getString("color"));
+				dto.setContent(rs.getString("content"));
+				dto.setDate(rs.getTimestamp("date"));
+				dto.setGno(rs.getInt("gno"));
+				dto.setImage(rs.getString("image"));
+				dto.setName(rs.getString("name"));
+				dto.setPrice(rs.getInt("price"));
+				dto.setSize(rs.getString("size"));
+			}//if
+			
+			System.out.println("DAO : 상품조회 완료");
+			System.out.println(dto);
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			closeDB();
+		}
+		
+		return dto;
+	}
+	//상품 상세정보 조회 - getGoods(gno)
 }

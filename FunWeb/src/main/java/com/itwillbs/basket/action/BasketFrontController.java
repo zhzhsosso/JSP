@@ -1,4 +1,4 @@
-package com.itwillbs.goods.action;
+package com.itwillbs.basket.action;
 
 import java.io.IOException;
 
@@ -9,10 +9,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.itwillbs.admin.goods.action.Action;
+import com.itwillbs.goods.action.ActionForward;
 
-@WebServlet("*.go")
-public class GoodsFrontController extends HttpServlet {
 
+@WebServlet("*.ba")
+public class BasketFrontController extends HttpServlet{
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		System.out.println(" C : doProcess() 호출 ");
@@ -30,30 +32,8 @@ public class GoodsFrontController extends HttpServlet {
 		ActionForward forward = null;
 
 		// 2. 가상주소 매핑(패턴1,2,3)
-		if(command.equals("/GoodsList.go")) {
-			System.out.println(" C : /GoodsList.go 호출 ");
-			System.out.println(" C : 패턴3 ");
-			
-			// GoodsListAction()
-			action = new GoodsListAction();
-			try {
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		else if(command.equals("/GoodsDetail.go")) {
-			System.out.println("C : /GoodsDetail.go 호출");
-			System.out.println("C : 패턴3");
-			
-			//GoodsDetailAction() 객체
-			action = new GoodsDetailAction();
-			try {
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
+		
+		
 		
 		
 		System.out.println(" C : 2. 가상주소 매핑 끝");
@@ -86,6 +66,4 @@ public class GoodsFrontController extends HttpServlet {
 		System.out.println(" C : doPost() ");
 		doProcess(request, response);
 	}
-	
-	
 }

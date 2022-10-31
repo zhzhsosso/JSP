@@ -93,7 +93,8 @@
 							<c:set var="goods" value="${goodsList[num] }"/>
 							<td>
 								<img src="./upload/${goods.image.split(',')[0] }" width="80" height="80"><br>
-								${goods.name } <br>
+									<a href="./GoodsDetail.go?gno=${goods.gno }">${goods.name }<br></a>
+								 
 								${goods.price }원 <br>
 							</td>
 							<c:set var="num" value="${num+1 }"/>
