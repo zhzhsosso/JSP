@@ -9,8 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.itwillbs.admin.goods.action.Action;
-import com.itwillbs.goods.action.ActionForward;
+
 
 
 @WebServlet("*.ba")
@@ -33,9 +32,32 @@ public class BasketFrontController extends HttpServlet{
 
 		// 2. 가상주소 매핑(패턴1,2,3)
 		
-		
-		
-		
+		if(command.equals("/BasketAddAction.ba")) {
+			System.out.println(" C : /BasketAddAction.ba 호출");
+			System.out.println(" C : [패턴2]");
+			
+			//BasketAddAction()
+			action = new BasketAddAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}	
+		}
+		else if(command.equals("/BasketList.ba")) {
+			System.out.println(" C: /BasketList.ba 호출");
+			System.out.println(" C: [패턴3]");
+			
+			//BasketListAction()
+			action = new BasketListAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		System.out.println(" C : 2. 가상주소 매핑 끝");
 		
 		// 3. 페이지 이동

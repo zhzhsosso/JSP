@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
+<%@ taglib prefix="fmt"  uri="http://java.sun.com/jsp/jstl/fmt"%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,53 +25,62 @@
 
  </script>
  <![endif]-->
- <script type="text/javascript">
- 	function isBascket(){
- 		//옵션 선택 체크 (크기,색상)
-//  		alert(document.fr.size.value);
- 		if(document.fr.size.value == ""){
- 			//크기옵션 선택 X
- 			alert("크기를 선택하시오");
- 			document.fr.size.focus();
- 			return;
- 		}
- 		if(document.fr.color.value == ""){//색상옵션 선택
- 			//크기옵션 선택 X
- 			alert("색상를 선택하시오");
- 			document.fr.size.focus();
- 			return;
- 		}
- 		//장바구니 페이지 이동
- 		var isMove = confirm("장바구니 페이지로 이동할까요?");
- 		
- 		if(isMove){
- 			//장바구니 페이지 이동
- 			alert("장바구니 페이지로 이동");
- 			document.fr.action="./BasketAdd.ba";
- 			document.fr.submit();
- 		}else{
- 			//계속 쇼핑하기 이동
- 			alert("계속 쇼핑하기!");
- 			//장바구니 정보 전달&저장 ./BasketAddAction.ba
- 			//+쇼핑정보
- 			location.href="GoodsList.go";
- 		}
- 	}//isBasKet()
- 	
- 	function isOrder(){
- 		if(document.fr.size.value == ""){
- 			alert("크기를 선택하시오");
- 			document.fr.size.focus();
- 			return;
- 		}
- 		if(document.fr.color.value == ""){//색상옵션 선택 X
-			 alert("색상을 선택하시오.");
- 		 	 document.fr.color.focus();
- 		 	 return;	 	
- 		}
- 		 alert(' 구매 페이지 이동(미구현)!!! ')
- 	}//isOrder
- </script>
+ 
+	 <script type="text/javascript">
+	 	 function isBasket(){
+	 		 // 옵션 선택 체크 (크기,색상)
+	 		 //alert(document.fr.size.value);
+	 		 //alert(document.fr.size);
+	 		 //console.log(document.fr.size);
+	 		 if(document.fr.size.value == ""){ //크기옵션 선택 X
+	 			 alert("크기를 선택하시오.");
+	 		 	 document.fr.size.focus();
+	 		 	 return;	 			 
+	 		 }
+	 		 if(document.fr.color.value == ""){ //색상옵션 선택 X
+	 			 alert("색상을 선택하시오.");
+	 		 	 document.fr.color.focus();
+	 		 	 return;	 			 
+	 		 }
+	 		 
+	 		 // 장바구니 페이지 이동
+	 		var isMove = confirm("장바구니 페이지로 이동할까요?");
+	 		 
+	 		if(isMove){
+	 			// 장바구니 페이지 이동
+	 			alert(" 장바구니 페이지로 이동 ");
+	 			document.fr.action="./BasketAddAction.ba";
+	 			document.fr.submit();
+	 		} else{
+	 			// 계속 쇼핑하기 이동
+	 			alert(" 계속 쇼핑하기 !");
+	 			// 장바구니 정보 전달&저장 ./BasketAddAction.ba
+	 			// + 쇼핑정보
+	 			location.href="GoodsList.go";	 			
+	 		} 		 
+	 		 
+	 	 }//isBasKet()
+	 	 
+	 	 function isOrder(){
+	 		 if(document.fr.size.value == ""){ //크기옵션 선택 X
+	 			 alert("크기를 선택하시오.");
+	 		 	 document.fr.size.focus();
+	 		 	 return;	 			 
+	 		 }
+	 		 if(document.fr.color.value == ""){ //색상옵션 선택 X
+	 			 alert("색상을 선택하시오.");
+	 		 	 document.fr.color.focus();
+	 		 	 return;	 			 
+	 		 }	
+	 		 
+	 		 alert(' 구매 페이지 이동(미구현)!!! ');
+	 		 
+	 	 }//isOrder
+	 	 
+	 	 
+	 
+	 </script>
+ 
 </head>
 <body>
 <div id="wrap">
@@ -93,68 +103,70 @@
 </nav>
 <!-- 왼쪽메뉴 -->
 <!-- 내용 -->
+<%-- ${dto } --%>
 <article>
-<h1>ITWILL's 쇼핑몰 상세페이지</h1>
-<form action="" method="post" name="fr">
-
+	<h1>ITWILL's 쇼핑몰 상세페이지</h1>
+	
+	<form action="" method="post" name="fr">
+	  <input type="hidden" name="gno" value="${dto.gno }">
 	<table border="1" id="notice">
-		<tr>
-			<td width="310">
-				<img src="./upload/${dto.image.split(',')[0] }"
-				width="300" height="300">
-			</td>
-			<td>
-			상품정보(구매옵션)<br>
-			<h2>상품명 : ${dto.name }</h2> <br>
-			<h2>판매가격 : <fmt:formatNumber value="${dtp.price }"/>원</h2><br>
-			<h2>구매수량 : <input type="number" name="amount" value="1"></h2><br>
-			<h2>(남은 수량 : ${dto.amount }개)</h2>
-			
-			<hr>
-			
-			<h2>구매 옵션</h2>
-			<h2>크기
-				<select name="size">
-					<option value="">크기를 선택하세요</option>
-					<c:forEach var="size" items="${dto.size.split(',') }">
-						<option value="${size}">${size }</option>
-					</c:forEach>
-				</select>
-			</h2>
-			<h2>색상</h2>
-				<select name="color">
-					<option value="">색상을 선택하세요</option>
-					<c:forTokens var="color" items="${dto.color }" delims=",">
-						<option value="${color }">${color }</option>
-					</c:forTokens>
-				</select>
-			<hr>
-			<h2>총 가격 : <fmt:formatNumber value="${dto.price * 1 }"/>원</h2>
-			
-			<h2> 
-				<a href="javascript: alert('장바구니');">[장바구니 담기]</a>
-	 			<a href="javascript: alert('바로구매');">[바로 구매하기]</a>
- 			</h2>
-			
-			</td>
-		</tr>
-		<tr>
-			<td colspan="2">
-				<c:forTokens var="img" items="${dto.image }" delims=','>
-					<c:if test="${img != null }">
-						<img src="./upload/${img }" width="400" height="500"><br>
-					</c:if>
-					<c:if test="${img == 'null' }">
-						<img src="./upload/default.jpg" width="400" height="500"><br>
-					</c:if>
-				</c:forTokens>
-			</td>
-		</tr>
-		<tr>
-			<td colspan="2">리뷰/QnA</td>
-		</tr>
+	   <tr>
+	      <td width="310">
+	        <img src="./upload/${dto.image.split(',')[0] }" 
+	          width="300" height="300">
+	      </td>
+	      <td>
+	       상품정보(구매옵션)<br>
+	       <h2>상품명 : ${dto.name }</h2>
+	       <h2>판매가격 <fmt:formatNumber value="${dto.price }"/> 원</h2>
+	       <h2>구매수량 : <input type="number" name="amount" value="1"></h2>
+	       <h2>(남은 수량 : ${dto.amount }개) </h2>
+	       <hr>
+	       <h2>구매 옵션</h2>
+	       <h2> 크기  :  
+		       <select name="size">
+		         <option value="">크기를 선택하세요</option>
+		         <c:forEach var="size" items="${dto.size.split(',') }">
+			         <option value="${size }">${size }</option>
+		         </c:forEach>
+		       </select>
+		   </h2>
+	       <h2>색상</h2>
+	       	   <select name="color">
+		         <option value="">색상을 선택하세요</option>
+		         <c:forTokens var="color" items="${dto.color }" delims=",">
+			         <option value="${color }">${color }</option>
+		         </c:forTokens>
+		       </select>
+	       <hr>	  
+	       <h2> 총 가격 : <fmt:formatNumber value="${dto.price * 1 }"/>원</h2> 
+	        
+	       <h2> 
+	        <a href="javascript: isBasket();">[장바구니 담기]</a>    
+	        <a href="javascript: isOrder();">[바로 구매하기]</a>
+	       </h2>
+	       
+	          
+	      </td>
+	   </tr>
+	   <tr>
+	      <td colspan="2">
+	        <c:forTokens var="img" items="${dto.image }" delims=",">
+				<c:if test="${img != 'null' }">
+					<img src="./upload/${img }" width="400" height="500"><br>
+				</c:if>
+				<c:if test="${img == 'null' }">
+					<img src="./upload/default.jpg" width="400" height="500"><br>
+				</c:if>
+			</c:forTokens>
+	      </td>
+	   </tr>
+      <tr>
+	      <td colspan="2">리뷰/QnA</td>
+	   </tr>
 	</table>
-</form>
+	</form>
+	
 </article>
 <!-- 내용 -->
 <!-- 본문 들어가는 곳 -->
@@ -165,6 +177,3 @@
 </div>
 </body>
 </html>
-
-
-

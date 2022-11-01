@@ -8,6 +8,10 @@
 	   </c:if>
 	   <c:if test="${id != null }">
 			<a href="./MemberInfo.me">${id }님의 info</a> | <a href="./MemberLogout.me">logout</a>
+			|
+			<a href="./BasketList.ba">장바구니</a>
+			|
+			<a href="./MemberLogout.me"></a>
 	   </c:if>		
 	</div>
 	<div class="clear"></div>
