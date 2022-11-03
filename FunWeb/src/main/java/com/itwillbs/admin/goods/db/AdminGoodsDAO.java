@@ -242,6 +242,7 @@ public class AdminGoodsDAO {
 			pstmt.setInt(1, gno);
 			
 			pstmt.executeUpdate();
+			System.out.println("상품삭제완");
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

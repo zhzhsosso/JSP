@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,41 +48,45 @@
 
 <!-- 게시판 -->
 <article>
-<h1>관리자 상품등록 리스트</h1>
+<h1> ${sessionScope.id }'s 장바구니 </h1>
+<%--  <%=session.getAttribute("id") %> --%>
+<%-- ${adminGoodsList } --%>
 <table id="notice">
-<tr><th class="tno">상품번호</th>
-    <th class="ttitle">카테고리</th>
-    <th class="twrite">이미지</th>
-    <th class="tdate">가격</th>
-    <th class="tdate">수량</th>
-    <th class="tdate">등록일자</th>
-    <th class="tread">관리</th></tr>
-    
-    <c:forEach var="dto" items="${adminGoodsList }">
 		<tr>
-			<td>${dto.gno }</td>
-			<td>${dto.category }</td>
-		    <td>
-		    	<img src="./upload/${dto.image.split(',')[0]}"width="50" height="50">
-		    </td>
-		    <td>${dto.price }</td>
-		    <td>${dto.amount }</td>
-		    <td>
-		    	<fmt:formatDate value="${dto.date }"/>
-		    </td>
-		    <td>
-		    	<a href="./adminGoodsModify.ag?gno=${dto.gno }">수정</a>
-		    	/
-		    	<a href="./AdminGoodsRemove.ag?gno=${dto.gno }">삭제</a>
-		    </td>
-	    </tr>
-    </c:forEach>
+			<th class="tno">번호</th>
+			<th class="ttitle">이미지</th>
+			<th class="twrite">상품명</th>
+			<th class="tdate">가격</th>
+			<th class="tdate">수량</th>
+			<th class="tdate">색상</th>
+			<th class="tdate">크기</th>
+			<th class="tread">관리</th>
+		</tr>
 
-</table>
+		<c:forEach var="i" begin="0" end="${basketList.size() - 1 }" step="1">
+		    <c:set var="bk"  value="${basketList[i] }" />
+		    <c:set var="goods" value="${goodsList[i] }"/>
+			<tr>
+				<td class="tno">${bk.b_num }</td>
+				<td class="ttitle">
+				  <img src="./upload/${goods.image.split(',')[0] }" 
+				       width="60" height="60">
+				</td>
+				<td class="twrite">${goods.name }</td>
+				<td class="tdate">${goods.price }</td>
+				<td class="tdate">${bk.b_g_amount }</td>
+				<td class="tdate">${bk.b_g_color }</td>
+				<td class="tdate">${bk.b_g_size }</td>
+				<td class="tread"> 
+					<a href="./BasketDeleteAction.ba?b_num=${bk.b_num }">삭제</a> 
+				</td>
+			</tr>
+		</c:forEach>
+	</table>
 <div id="table_search">
-	<input type="button" value="상품등록" class="btn"
-		onclick="location.href='./AdminGoodsAdd.ag';"
-	>
+    <input type="button" value="상품등록" class="btn" 
+      onclick=" location.href='./AdminGoodsAdd.ag'; "
+    >
 </div>
 <div class="clear"></div>
 <div id="page_control">

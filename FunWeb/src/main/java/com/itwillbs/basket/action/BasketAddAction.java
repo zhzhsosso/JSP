@@ -45,7 +45,7 @@ public class BasketAddAction implements Action{
 		//		-정보없으면 : 정보 insert
 		BasketDAO dao = new BasketDAO();
 		
-		boolean isUpdate = dao.checBasket(dto);
+		boolean isUpdate = dao.checkBasket(dto);
 		
 		if(!isUpdate) {
 			//정보 추가(insert)

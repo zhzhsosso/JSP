@@ -90,8 +90,8 @@ public class AdminGoodsFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-		else if(command.equals("/adminGoodsRemove.ag")) {
-			System.out.println("C : /adminGoodsRemove.ag 호출");
+		else if(command.equals("/AdminGoodsRemove.ag")) {
+			System.out.println("C : /AdminGoodsRemove.ag 호출");
 			System.out.println("C : 패턴2");
 			
 			//adminGoodsRemoveAction

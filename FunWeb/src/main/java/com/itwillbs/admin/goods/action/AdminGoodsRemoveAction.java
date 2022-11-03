@@ -9,21 +9,22 @@ public class AdminGoodsRemoveAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("M : AdminGoodsRemoveAction_execute 호출");
-		//로그인세션(생략)
-		//전달정보 저장
+
+		System.out.println(" M : AdminGoodsRemoveAction_execute 호출 ");
+		// 로그인세션(생략)
+		// 전달정보 저장
 		int gno = Integer.parseInt(request.getParameter("gno"));
 		
-		//DAO - 삭제 메서드
+		// DAO - 삭제 메서드
 		AdminGoodsDAO dao = new AdminGoodsDAO();
 		
 		dao.adminRemoveGoods(gno);
 		
-		//페이지 이동
+		// 페이지 이동
 		ActionForward forward = new ActionForward();
 		forward.setPath("./AdminGoodsList.ag");
 		forward.setRedirect(true);
-		return null;
+		return forward;
 	}
 
 }
