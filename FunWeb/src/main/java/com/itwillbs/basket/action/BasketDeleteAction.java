@@ -27,7 +27,7 @@ public class BasketDeleteAction implements Action {
 
 		// DAO - 장바구니 삭제(b_num)
 		BasketDAO dao = new BasketDAO();
-		int result = dao.deleteBasket(b_num);
+		int result = dao.deleteBasket(id);
 		
 		if(result == 1) {
 			System.out.println(" M : 장바구니 삭제완료 ");

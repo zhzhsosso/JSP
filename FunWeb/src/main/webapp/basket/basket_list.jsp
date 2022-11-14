@@ -63,6 +63,7 @@
 			<th class="tread">관리</th>
 		</tr>
 
+      <c:if test="${ basketList.size() != 0 }">
 		<c:forEach var="i" begin="0" end="${basketList.size() - 1 }" step="1">
 		    <c:set var="bk"  value="${basketList[i] }" />
 		    <c:set var="goods" value="${goodsList[i] }"/>
@@ -82,11 +83,14 @@
 				</td>
 			</tr>
 		</c:forEach>
+		 </c:if>
 	</table>
 <div id="table_search">
-    <input type="button" value="상품등록" class="btn" 
-      onclick=" location.href='./AdminGoodsAdd.ag'; "
-    >
+    <input type="button" value="구매하기" class="btn" 
+      onclick=" location.href='./OrderStart.or'; ">
+      
+    <input type="button" value="계속쇼핑하기" class="btn" 
+      onclick=" location.href='./GoodsList.go'; ">
 </div>
 <div class="clear"></div>
 <div id="page_control">

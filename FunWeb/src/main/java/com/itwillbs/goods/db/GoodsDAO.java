@@ -211,4 +211,17 @@ public class GoodsDAO {
 		return dto;
 	}
 	//상품 상세정보 조회 - getGoods(gno)
+	
+	//구매후 상품 수량변경 - updateAmount()
+	public void updateAmount(List basketList) {
+		try {
+			con = getConnection();
+			sql="update itwill_goods set amount=amount-? where gno=?";
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			closeDB();
+		}
+	}
+	//구매후 상품 수량변경 - updateAmount()
 }
